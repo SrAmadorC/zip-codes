@@ -38,15 +38,10 @@ class ZipCodeController extends Controller
      */
     public function show($zip_code)
     {
-        $data =Cache::remember('zip_codes', 10000, function () use($zip_code){
-            return ZipCode::with('settlements','federal_entity','municipality')
-            ->where('zip_code',$zip_code)
-            ->get();
-        }); 
-        
-        // $data = ZipCode::with('settlements','federal_entity','municipality')
-        // ->where('zip_code',$zip_code)
-        // ->get();
+
+        $data = ZipCode::with('settlements','federal_entity','municipality')
+        ->where('zip_code',$zip_code)
+        ->get();
 
 
        $result = ZipCodeResource::collection($data);
