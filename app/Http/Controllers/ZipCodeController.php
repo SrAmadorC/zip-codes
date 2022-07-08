@@ -41,10 +41,9 @@ class ZipCodeController extends Controller
 
         $data = ZipCode::with('settlements','federal_entity','municipality')
         ->where('zip_code',$zip_code)
-        ->get();
-
-
-       $result = ZipCodeResource::collection($data);
+        ->first();
+  
+       $result = new ZipCodeResource($data);
 
        return response()->json($result);
     }
